@@ -54,11 +54,25 @@ module cord(
                 translate([curve_radius,0])
                     circle(d=cord_thickness);
                 translate([curve_radius, curve_radius/2])
-                    square([cord_thickness, curve_radius], center = true);
-                
+                    square([cord_thickness, curve_radius],                center = true);   
             }
         }
     }
+    translate([-curve_radius*2, 0, 0]){
+        translate([0, -curve_radius/2, 0])
+        cube(
+            [cord_thickness, 
+            curve_radius, 
+            straight_section], 
+            center=true
+            );
+        cylinder(
+        h = straight_section, 
+        d = cord_thickness, 
+        center = true
+            );
+    }
+        
 }
 
 // The plug is (-x, y) 2nd quadrant located
@@ -117,5 +131,34 @@ module ipadCharger(
         }
     } 
 }
-ipadCharger();
+
+module MacLargeBlock_Prong(
+    w_plug = true,
+    block = [ 80, 29, 6 ],
+    plug = [ 25, 17, 9 ],
+    cord = [ 30, 25]
+) 
+{
+        charger_block(
+        block[0],
+        block[1],
+        block[2]
+    );
+    if (w_plug){
+        translate([ -16, block[0]/2+plug[0]/2, 0]){
+            rotate([270, 0, 0])
+                plug(
+                    plug[0],
+                    plug[1],
+                    plug[2],
+                    cord[0],
+                    cord[1]
+                );
+        }
+    } 
+}
+
+MacLargeBlock_Prong();
+
+// ipadCharger();
 // charger_block();

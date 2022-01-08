@@ -1,7 +1,12 @@
-# ipadCordHolder
-OpenSCAD files for a simple iPad charger and cord holder.
+# Cord Storages
 
-Meant to be used to 3D print the holder.
+OpenSCAD package to produce cord storage solution for devices.
+
+### Usage
+
+Meant to be used to 3D print the holders.
+
+Use the stl files to create g-code files in whatever format your favorite printer requires (links and more info to come...).
 
 ## Notes
 

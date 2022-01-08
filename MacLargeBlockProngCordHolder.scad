@@ -1,28 +1,39 @@
-// Library: iPadCordHolder.scad
+// Library: MacBlockProngCordHolder.scad
 // Version: 1.0.0
 // Author: David Bowers
 // Copyright: 2022
 // License: 2-clause BSD License (http://opensource.org/licenses/BSD-2-Clause)
 
-// ipadCordHolder(); 
+// MacBlockProngCordHolder(); 
 //   Made to export a 3D printable stl file from.abs
 
 // EXAMPLE USAGE:
-// ipadCordHolder();
+// MacBlockProngCordHolder();
 //   export stl file and import it into your printer software. 
 
-// Comment out these two lines if rendering is to slow.
+// Comment out these two lines if preview rendering is to slow.
+// UnComment before render for stl to get a good print.
 $fa = 1;
 $fs = 0.4;
 
+// ToDo: Add cord length function. 
+//  The pill shape is adjusted to make a perfect wrap
+//  for a given cord length and there is an end storage
+//  so the tip is not all willy nilly out there in the 
+//  world... That only leads to problems. 
+
 use <./packages/iPadCharger_v201.scad>
 
-oblongy = 70;
-girthx = 75;
-thickz = 20;
-channelz = 18;
-channelx = girthx/2.2;
+// ToDo: Sizes should be calculated based on the block that
+//       is pluged in and the cord length.
+
+oblongy = 78;
+girthx = 107;
+thickz = 18;
+channelz = 17;
+channelx = girthx/2.1;
 channely = oblongy/2;
+rotation = 12;
 
 module theEgg(
     oblongy = 90,
@@ -76,11 +87,11 @@ difference(){
         channely
     );
     translate([0, -oblongy/3, thickz/4]){
-        rotate([0, 0, -15])
-        ipadCharger(true);
+        rotate([0, 0, -rotation])
+        MacLargeBlock_Prong(true);
     }
     for (opps = [-1, 1]){
-        translate([opps*girthx/4, oblongy/4, 0]){
+        translate([opps*girthx/3, oblongy/2, 0]){
             rotate([ 0, 0, 90])
                 cube([15, 4, thickz+2], center = true);
         }
