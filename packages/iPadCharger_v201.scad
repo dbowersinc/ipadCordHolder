@@ -145,7 +145,7 @@ module MacLargeBlock_Prong(
         block[2]
     );
     if (w_plug){
-        translate([ -16, block[0]/2+plug[0]/2, 0]){
+        translate([ -20, block[0]/2+plug[0]/2, 0]){
             rotate([270, 0, 0])
                 plug(
                     plug[0],

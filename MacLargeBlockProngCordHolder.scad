@@ -29,9 +29,9 @@ use <./packages/iPadCharger_v201.scad>
 
 oblongy = 78;
 girthx = 107;
-thickz = 18;
+thickz = 20;
 channelz = 17;
-channelx = girthx/2.1;
+channelx = girthx/2;
 channely = oblongy/2;
 rotation = 12;
 
@@ -86,7 +86,7 @@ difference(){
         channelx,
         channely
     );
-    translate([0, -oblongy/3, thickz/4]){
+    translate([0, -oblongy/3, thickz/4.5]){
         rotate([0, 0, -rotation])
         MacLargeBlock_Prong(true);
     }
