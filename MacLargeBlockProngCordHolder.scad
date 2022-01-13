@@ -27,13 +27,13 @@ use <./packages/iPadCharger_v201.scad>
 // ToDo: Sizes should be calculated based on the block that
 //       is pluged in and the cord length.
 
-oblongy = 78;
-girthx = 107;
+oblongy = 70;
+girthx = 100;
 thickz = 20;
 channelz = 17;
 channelx = girthx/2;
 channely = oblongy/2;
-rotation = 12;
+rotation = 0;
 
 module theEgg(
     oblongy = 90,
@@ -86,7 +86,7 @@ difference(){
         channelx,
         channely
     );
-    translate([0, -oblongy/3, thickz/4.5]){
+    translate([0, -oblongy/3.2, thickz/4.5]){
         rotate([0, 0, -rotation])
         MacLargeBlock_Prong(true);
     }

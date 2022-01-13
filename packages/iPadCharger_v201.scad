@@ -29,25 +29,28 @@ module charger_block(
         [4,8,20],center=true
     );
 }
-
+// the tail and the start should be their own pieces
 module cord(
     straight_section = 30,
     curve_radius = 20,
     cord_thickness = 6,
-    degree_of_curve = 180
+    degree_of_curve = 180,
+    tail_section = 30
 )
 {
-    translate([0, -curve_radius/2, 0])
-        cube(
-            [cord_thickness, 
-            curve_radius, 
-            straight_section], 
-            center=true
-        );
-    cylinder(
-        h = straight_section, 
-        d = cord_thickness, 
-        center = true);
+    translate([0, 0, abs(straight_section/2-tail_section/2)]){
+        translate([0, -curve_radius/2, 0])
+            cube(
+                [cord_thickness, 
+                curve_radius, 
+                tail_section], 
+                center=true
+            );
+        cylinder(
+            h = tail_section, 
+            d = cord_thickness, 
+            center = true);
+    }
     translate([-curve_radius,0,straight_section/2]){
         rotate([90,0,0]){
             rotate_extrude(angle=degree_of_curve){
@@ -72,9 +75,9 @@ module cord(
         center = true
             );
     }
-        
+          
 }
-
+// cord();
 // The plug is (-x, y) 2nd quadrant located
 // depending on given type {ipad, mac_small, mac_large}
 module plug(
@@ -84,9 +87,12 @@ module plug(
     cord_straight = 30,
     cord_curve = 20,
     cord_thickness = 6,
-    cord_rotation = 180
+    cord_rotation = 180,
+    cord_tail = 15,
+    opposite = false
 )
 {
+    cord_x = opposite ? cord_curve*2 : 0;
     roundedBox(
         size=[plug_thick,plug_width,plug_length],
         radius=plug_thick/2, 
@@ -98,16 +104,17 @@ module plug(
         plug_width,
         plug_length],
         center=true);
-    translate([0, 0, abs(cord_straight-plug_length)/2])
+    translate([cord_x, 0, abs(cord_straight-plug_length)/2])
         cord(
             cord_straight,
             cord_curve,
             cord_thickness,
-            cord_rotation
+            cord_rotation,
+            cord_tail 
         );
 }
 
-// plug();
+ //plug(opposite=true);
 
 module ipadCharger(
     w_plug = true,
@@ -136,7 +143,7 @@ module MacLargeBlock_Prong(
     w_plug = true,
     block = [ 80, 29, 6 ],
     plug = [ 25, 17, 9 ],
-    cord = [ 30, 25]
+    cord = [ 30, 32, -3]
 ) 
 {
         charger_block(
@@ -144,18 +151,26 @@ module MacLargeBlock_Prong(
         block[1],
         block[2]
     );
+    difference() {
     if (w_plug){
-        translate([ -20, block[0]/2+plug[0]/2, 0]){
+        translate([ -19, block[0]/2+plug[0]/2, 0]){
             rotate([270, 0, 0])
                 plug(
                     plug[0],
                     plug[1],
                     plug[2],
                     cord[0],
-                    cord[1]
+                    cord[1],
+                    cord_tail=cord[2],
+                    opposite=true
                 );
         }
+    }
+    translate([40,73,15]){
+        rotate([0,0,30])
+        cube([30,30,40], center=true);
     } 
+}
 }
 
 MacLargeBlock_Prong();
