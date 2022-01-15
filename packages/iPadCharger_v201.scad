@@ -141,7 +141,7 @@ module ipadCharger(
 
 module MacLargeBlock_Prong(
     w_plug = true,
-    block = [ 80, 29, 6 ],
+    block = [ 81, 29, 6 ],
     plug = [ 25, 17, 9 ],
     cord = [ 30, 32, -3]
 ) 
