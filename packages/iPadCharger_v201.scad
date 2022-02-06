@@ -1,5 +1,5 @@
 // Library: ipadcharger.scad
-// Version: 2.0.1
+// Version: 2.0.2
 // Author: David Bowers
 // Copyright: 2022
 // License: 2-clause BSD License (http://opensource.org/licenses/BSD-2-Clause)
@@ -9,6 +9,9 @@
 // EXAMPLE USAGE:
 // ipadCharger();
 // ipadCharger(false); use without cord. 
+
+// TODO: The cord tail diameter should be relative to the size of the block.
+// TODO: Version should be entered in from package release. 
 
 
 include <MCAD/boxes.scad>
@@ -173,7 +176,35 @@ module MacLargeBlock_Prong(
 }
 }
 
-MacLargeBlock_Prong();
+module MacSmallBlock_Prong(
+    w_plug = true,
+    block = [ 56.1, 29, 4 ],
+    plug = [ 19, 13, 8 ],
+    cord = [ 22, 23, -6]
+) 
+{
+        charger_block(
+        block[0],
+        block[1],
+        block[2]
+    );
+    if (w_plug){
+        translate([ -8, block[0]/2+plug[0]/2, 0]){
+            rotate([270, 0, 0])
+                plug(
+                    plug[0],
+                    plug[1],
+                    plug[2],
+                    cord[0],
+                    cord[1],
+                    cord_tail=cord[2],
+                    opposite=true
+                );
+        } 
+}
+}
+
+MacSmallBlock_Prong();
 
 // ipadCharger();
 // charger_block();
