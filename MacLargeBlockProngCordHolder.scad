@@ -13,8 +13,8 @@
 
 // Comment out these two lines if preview rendering is to slow.
 // UnComment before render for stl to get a good print.
-$fa = 1;
-$fs = 0.4;
+//$fa = 1;
+//$fs = 0.4;
 
 // ToDo: Add cord length function. 
 //  The pill shape is adjusted to make a perfect wrap

@@ -12,8 +12,8 @@
 //   export stl file and import it into your printer software. 
 
 // Comment out these two lines if rendering is to slow.
-$fa = 1;
-$fs = 0.4;
+//$fa = 1;
+//$fs = 0.4;
 
 use <./packages/iPadCharger_v201.scad>
 
