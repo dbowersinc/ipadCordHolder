@@ -11,6 +11,14 @@
 // ipadCordHolder();
 //   export stl file and import it into your printer software. 
 
+
+// TODO:
+//
+// 1.   The minimum diameter is the charger width + 2.
+// 2.   The bare cord into the plug diameter is a function
+//      of the pill diameter. 
+//
+
 // Comment out these two lines if rendering is to slow.
 $fa = 1;
 $fs = 0.4;
@@ -18,13 +26,14 @@ $fs = 0.4;
 use <./packages/iPadCharger_v203.scad>
 use <./packages/BodySizer.scad>
 
-total_cord_length = 1829; // 72 in (1 in = 25.4 mm)
+total_cord_length = 72 * 25.4; // 72 in (1 in = 25.4 mm)
 cord_start = getCordStartLength(); 
+
 echo(cord_start);
 cord_tail = 36; 
-cord_segments = 4.7;
-straight_ratio = .44;
-diameter_ratio = .56; 
+cord_segments = 5;
+straight_ratio = .40;
+diameter_ratio = 1 - straight_ratio; 
 
 pill_straight = getStraight( 
                     total_cord_length, 
@@ -40,6 +49,7 @@ pill_diameter = getDiameter(
                     cord_segments, 
                     diameter_ratio
                     );
+echo(pill_diameter, pill_straight);
 thickz = 20;
 channelz = 17;
 channelx = pill_diameter/2;
@@ -97,7 +107,7 @@ difference(){
         channelx,
         channely
     );
-    translate([0, -pill_straight/3, thickz/4]){
+    translate([0, -pill_straight/3, thickz/4.6]){
         //rotate([0, 0, 0])
         ipadCharger(true);
     }
