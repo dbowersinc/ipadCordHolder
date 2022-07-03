@@ -25,10 +25,10 @@ module cord(
 )
 {
     translate([0, 0, abs(straight_section/2-tail_section/2)]){
-        translate([0, -curve_radius/2, 0])
+        translate([0, -15, 0])
             cube(
                 [cord_thickness, 
-                curve_radius, 
+                30, 
                 tail_section], 
                 center=true
             );
@@ -42,16 +42,16 @@ module cord(
             rotate_extrude(angle=degree_of_curve){
                 translate([curve_radius,0])
                     circle(d=cord_thickness);
-                translate([curve_radius, curve_radius/2])
-                    square([cord_thickness, curve_radius],                center = true);   
+                translate([curve_radius, 15])
+                    square([cord_thickness, 30],                center = true);   
             }
         }
     }
     translate([-curve_radius*2, 0, 0]){
-        translate([0, -curve_radius/2, 0])
+        translate([0, -15, 0])
         cube(
             [cord_thickness, 
-            curve_radius, 
+            30, 
             straight_section], 
             center=true
             );
@@ -63,3 +63,5 @@ module cord(
     }
           
 }
+
+cord();

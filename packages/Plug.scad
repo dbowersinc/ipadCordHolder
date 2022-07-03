@@ -59,3 +59,5 @@ module plug(
             cord_tail 
         );
 }
+
+plug();
